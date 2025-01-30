@@ -22,12 +22,16 @@ namespace notatnik_
         bool wprowadzonoZmiany { get; set; } =false;
         bool motywNocny {  get; set; } =false;
         public string textSize { get; set; } = "10";
-        Brush buttonfore = Brushes.Black;
-        Brush buttonback = Brushes.White;
+        Color black = Color.FromRgb(00, 00, 00);
+        Color white = Color.FromRgb(200, 200, 200);
+        public Color Buttonfore { get; set; }
+        public Color Buttonback { get; set; }
         public MainWindow()
         {
             InitializeComponent();
             DataContext = this;
+            Buttonfore = black;
+            Buttonback = white;
         }
 
         private void NewFile(object sender, RoutedEventArgs e)
@@ -126,13 +130,12 @@ namespace notatnik_
                 textSizeInput.Foreground = Brushes.Gray;
                 textSizeInput.Background = Brushes.Black;
                 window.Background = Brushes.Black;
-                trybButton.Background = Brushes.Black;
-                trybButton.Foreground = Brushes.White;
                 menu.Background = Brushes.Black;
                 menu.Foreground = Brushes.White; 
                 menu2.Background = Brushes.Black;
                 menu2.Foreground = Brushes.White;
-                buttonback = Brushes.Black;
+                Buttonback = black;
+                Buttonfore = white;
             }
             else
             {
@@ -142,12 +145,12 @@ namespace notatnik_
                 textSizeInput.Foreground = Brushes.Black;
                 textSizeInput.Background = Brushes.White;
                 window.Background = Brushes.White;
-                trybButton.Background = Brushes.White;
-                trybButton.Foreground = Brushes.Black;
                 menu.Background = Brushes.White;
                 menu.Foreground = Brushes.Black;
                 menu2.Background = Brushes.White;
                 menu2.Foreground = Brushes.Black;
+                Buttonback = white;
+                Buttonfore = black;
             }
         }
 
@@ -162,6 +165,20 @@ namespace notatnik_
             InfoAutor infoApp = new InfoAutor();
             infoApp.ShowDialog();
 
+        }
+
+        private void Kolor(object sender, RoutedEventArgs e)
+        {
+            kolor color = new kolor();
+            color.ShowDialog();
+            miejsce.Foreground = new SolidColorBrush(color.color);
+        }
+        private void Styl(object sender, RoutedEventArgs e)
+        {
+            Styl styl = new Styl();
+            styl.ShowDialog();
+            miejsce.FontStyle = styl.styl;
+            miejsce.FontWeight = styl.grubosc;
         }
     }
 }
